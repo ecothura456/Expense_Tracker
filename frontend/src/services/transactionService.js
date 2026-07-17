@@ -17,3 +17,4 @@ export const updateTransaction = (id, transaction) => {
 export const deleteTransaction = (id) => {
   return axios.delete(`${API_URL}/${id}`);
 };
+conlole.log("may zaw")
