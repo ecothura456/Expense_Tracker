@@ -5,6 +5,7 @@ export default function Home() {
     <div>
       
         <h1>aung myat moe</h1>
+        <h4>こんにちは</h4>
       {/* Hero Section */}
       <section className="container py-5">
         <div className="row align-items-center min-vh-75">
