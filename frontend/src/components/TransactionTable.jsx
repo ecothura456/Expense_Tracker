@@ -1,33 +1,9 @@
 import { FaEdit, FaTrash } from "react-icons/fa";
 
-function TransactionTable() {
-  const transactions = [
-    {
-      id: 1,
-      title: "Salary",
-      amount: 50000,
-      type: "Income",
-      category: "Salary",
-      transactionDate: "2026-07-14",
-    },
-    {
-      id: 2,
-      title: "Lunch",
-      amount: 1200,
-      type: "Expense",
-      category: "Food",
-      transactionDate: "2026-07-14",
-    },
-    {
-      id: 3,
-      title: "Train",
-      amount: 500,
-      type: "Expense",
-      category: "Transport",
-      transactionDate: "2026-07-13",
-    },
-  ];
-
+function TransactionTable({transactions,onEdit}) {
+  const recentTransactions = [...transactions]
+  .sort((a,b) => b.id - a.id)
+  .slice(0,5);
   return (
     <div className="card border-0 shadow-sm h-100">
       <div className="card-body p-4">
@@ -37,6 +13,7 @@ function TransactionTable() {
           <table className="table table-hover align-middle">
             <thead className="table-light">
               <tr>
+                <th>No</th>
                 <th>Title</th>
                 <th>Amount</th>
                 <th>Type</th>
@@ -47,8 +24,15 @@ function TransactionTable() {
             </thead>
 
             <tbody>
-              {transactions.map((transaction) => (
+              {recentTransactions.length === 0 ?(
+                <tr>
+                  <td colSpan="6" className="text-center py-4">
+                      No transactions found.
+                  </td>
+                </tr>
+              ) :(recentTransactions.map((transaction,index) => (
                 <tr key={transaction.id}>
+                  <td>{index + 1}</td>
                   <td>{transaction.title}</td>
 
                   <td>¥ {transaction.amount.toLocaleString()}</td>
@@ -73,6 +57,7 @@ function TransactionTable() {
                     <button
                       type="button"
                       className="btn btn-sm btn-outline-primary me-2"
+                      onClick={() => onEdit(transaction)}
                     >
                       <FaEdit />
                     </button>
@@ -85,7 +70,7 @@ function TransactionTable() {
                     </button>
                   </td>
                 </tr>
-              ))}
+              )))}
             </tbody>
           </table>
         </div>
