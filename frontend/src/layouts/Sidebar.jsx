@@ -1,52 +1,46 @@
-import "./Sidebar.css";
-import {
-  FaHome,
-  FaListAlt,
-  FaChartPie,
-  FaWallet,
-} from "react-icons/fa";
+import { Link, NavLink } from "react-router-dom";
 
-function Sidebar() {
+export default function Sidebar() {
   return (
-    <aside className="sidebar bg-dark text-white d-flex flex-column shadow">
-      {/* Logo */}
-      <div className="sidebar-logo d-flex align-items-center">
-        <FaWallet className="logo-icon text-warning" />
-        <span className="ms-2 fw-bold fs-4">Expense Tracker</span>
-      </div>
+    <div
+      className=" text-white p-3"
+      style={{ minHeight: "100vh", width: "250px" ,backgroundColor:"#1E293B"}}
+    >
+      <h4 className="mb-4">My Dashboard</h4>
 
-      {/* Navigation */}
-      <ul className="nav flex-column mt-4">
+      <ul className="nav flex-column">
 
-        <li className="nav-item">
-          <a href="#" className="nav-link active">
-            <FaHome className="me-2" />
+        <li className="nav-item mb-2">
+          <NavLink className="nav-link text-white" to="/dashboard">
             Dashboard
-          </a>
+          </NavLink>
         </li>
 
-        <li className="nav-item">
-          <a href="#" className="nav-link">
-            <FaListAlt className="me-2" />
+        <li className="nav-item mb-2">
+          <NavLink
+            className="nav-link text-white"
+            to="/dashboard/transactions"
+          >
             Transactions
-          </a>
+          </NavLink>
         </li>
 
-        <li className="nav-item">
-          <a href="#" className="nav-link">
-            <FaChartPie className="me-2" />
+        <li className="nav-item mb-2">
+          <NavLink
+            className="nav-link text-white"
+            to="/dashboard/reports"
+          >
             Reports
-          </a>
+          </NavLink>
+        </li>
+
+        <li className="nav-item mt-4">
+          <Link className="nav-link text-danger" to="/">
+            Logout
+          </Link>
         </li>
 
       </ul>
-
-      {/* Footer */}
-      <div className="sidebar-footer mt-auto text-center">
-        <small>Expense Tracker v1.0</small>
-      </div>
-    </aside>
+    </div>
   );
 }
-
-export default Sidebar;

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function TransactionForm() {
+function TransactionForm({onCreate,selectedTransaction,onUpdate}) {
   const [formData, setFormData] = useState({
     title: "",
     amount: "",
@@ -11,6 +11,9 @@ function TransactionForm() {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    console.log("name =", name);
+    console.log("value =", value);
+
 
     setFormData((previousData) => ({
       ...previousData,
@@ -18,11 +21,32 @@ function TransactionForm() {
     }));
   };
 
-  const handleSubmit = (event) => {
+  useEffect(() =>{
+    if (selectedTransaction){
+      setFormData(selectedTransaction)
+    }
+  },[selectedTransaction])
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(formData);
-  };
+    const newTransaction = {
+      ...formData,amount: Number(formData.amount)
+    };
+    if(selectedTransaction){
+      await onUpdate(selectedTransaction.id,newTransaction)
+    }else{
+      await onCreate(newTransaction);
+    }
+    
+    setFormData({
+    title: "",
+    amount: "",
+    type: "Income",
+    category: "",
+    transactionDate: "",
+  });
+  }
 
   return (
     <div className="card border-0 shadow-sm h-100">
@@ -125,7 +149,7 @@ function TransactionForm() {
 
             <div className="col-12 mt-4">
               <button type="submit" className="btn btn-primary w-100">
-                Save Transaction
+                {selectedTransaction ? "Update Transaction":"Save Transaction"}
               </button>
             </div>
           </div>

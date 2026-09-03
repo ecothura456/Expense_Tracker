@@ -1,25 +1,25 @@
+import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
-import Header from "./Header";
-import Dashboard from "../pages/Dashboard";
 
-function MainLayout() {
+export default function MainLayout() {
   return (
-    <div className="container-fluid">
-      <div className="row flex-nowrap">
-        <div className="col-auto p-0">
+    <div className="container-fluid p-0">
+      <div className="row g-0">
+
+        {/* Sidebar */}
+        <div className="col-md-2">
           <Sidebar />
         </div>
 
-        <main className="col p-0 bg-light">
-          <Header />
+        {/* Right side */}
+        <div className="col-md-10">
 
-          <div className="p-4">
-            <Dashboard />
-          </div>
-        </main>
+          <main className="p-4 bg-light min-vh-100">
+            <Outlet />
+          </main>
+        </div>
+
       </div>
     </div>
   );
 }
-
-export default MainLayout;
