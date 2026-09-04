@@ -6,6 +6,7 @@ export default function Home() {
       
         <h1>aung myat moe</h1>
         <h4>こんにちは</h4>
+        <p>Welcome to Expense Tracker</p>
       {/* Hero Section */}
       <section className="container py-5">
         <div className="row align-items-center min-vh-75">
