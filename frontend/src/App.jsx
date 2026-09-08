@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard'
 import Navbar from './components/Navbar'
 import Transactions from './pages/Transactions'
 import Reports from './pages/Reports'
+import Footer from './components/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,7 @@ function App() {
 
 
     </Routes>
+    <Footer/>
     </BrowserRouter>
     </>
   )
